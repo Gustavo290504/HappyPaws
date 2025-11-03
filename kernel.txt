@@ -1,0 +1,105 @@
+kernel 
+
+es el programa central donde se ejecutan los procesos, gestiona el uso de la CPU y la memoria.
+
+Sirve para dar orden, repartir recursos y dar estabilidad
+
+Sino existiera, no habría una estabilidad en la computadora, seria inseguro e inestable
+
+Cada vez que se utiliza un comando, el kernel entra mediante una syscall 
+
+Syscall
+Es la entrada para poder hacer un proceso.
+Sirve para que el usuario utilice comandos de alto privilegio, además de separar la comodidad de la seguridad.
+
+El PID se puede definir como un identificador único con memoria asignada y procesos.
+Sirve para aislar tareas, además de poder ejecutar procesos simultaneos sin perder un orden.
+
+El userspace es donde corren los programas normales mientras que el kernel es donde ocurren los procesos, el userspace solo puede acceder al kernel mediante el syscall.
+
+el init es el primer proceso de usuario (PID1), en debian, systemd es el que inicia este proceso.
+Sirve para arrancar, detener y vigilar servicios.
+Existe para que el programa arranque adecuadamente 
+Sytemctl es una herramienta de control (status, start, stop)
+
+
+Directorios virtuales :
+es un sistema de archivos que expone la información del kernel, como puede ser :
+cmdline - argumentos con los que se lanzo
+fd - descriptores de archivos abiertos por el proceso
+meminfo - muestra la información de la memoria del sistema
+cpuinfo - muestra la información del cpu del sistema
+status - estado de un proceso.
+
+fork es una llamada al sistema mediante syscall que clona el proceso actual.
+el padre seguirá siendo el bash, mientras que el hijo sera el que ejecute el comando real.
+
+padre (PID 123) bash
+hijo (PID 124) clon del bash esperando a ejecutar otro comando.
+
+exec() - reemplaza la imagen del proceso por un nuevo program, es decir, deja de ejecuta el codigo que estaba corriendo y empieza a ejecutar otro que se indique.
+despues de excec, ya no es bash, ahora es ls.
+
+El kernel indica que proceso obtiene CPU
+ls - listado de archivos.
+
+cuando ls acaba,
+llama a exit
+el kernel marca el prcoeso como zombie hasta que el padre bash llame a wait para recoger el estado de salida.
+
+el fork ayuda a que el sistema pueda ejectuar multiples tareas al mismo tiempo, system es clave para arrancar serviciosy controlar y ejecucion.
+
+EJEMPLO TEORICO DE FUNCIONAMIENTO
+
+1- el equipo arranca
+2- el kernel de Linux arranca
+3-systemd inicia
+4-systmd lanza todos los servicios.
+5-abrimos terminal
+
+ps-muestra info de procesos
+-p 1 - filtra para mostrar solo el pid 1
+-o pid, comm - muestra pid y el nombre del comando.
+
+R,S,T,Z - running, sleeping, stopped, zombie
+
+Sirve para identificar que proceso parece colgado o inactivo
+diagnosticar el uso de CPU y memoria.
+
+Listo : el proceso esta preparado para ejecutarse, pero no esta ejecutandose
+ejecucion: el proceso esta utilizando la cpu activamente
+espera : el proceso esta bloqueado, esperando un evento extremo
+parado : el proceso ha sido detenido temporalmente.
+zombie: el proceso termino su proceso
+
+Listo - ejecucion:despachar
+ejecucion - listo:desalojar
+ejecucion - espera:dormir
+espera - listo: despertar
+ejecucion - parado : dormir
+parado - listo : despertar
+ejecucion - zombie: finalizar
+
+PS AUX
+
+a - muestra proceso de todos los usuarios
+u - muestra usuario y consumo
+x - incluye proceso sin terminal asociada
+
+Atajos y comandos clave
+
+Ctrl C : envia signit
+Ctrl Z : pausa
+& : lanza al background
+jobs : lista jobs controlado por tu shell
+fg % N : trae N al foreground
+bg % N : continua N ne el background
+disown : Desvincula el job de shell
+nohup : El proceso sobrevive si se cierra sesión
+
+
+
+
+
+
+	

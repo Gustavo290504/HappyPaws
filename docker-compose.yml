@@ -1,0 +1,39 @@
+# Versión del formato del archivo, la 3.8 es moderna y estable.
+version: "3.8"
+
+# Aquí definimos todos los "servicios" o contenedores que nuestra app necesita.
+# Por ahora, solo necesitamos uno: la base de datos.
+services:
+  # 'postgres' es el nombre que le damos a nuestro servicio de base de datos.
+  postgres:
+    # Le decimos a Docker que use la imagen oficial de PostgreSQL, versión 15.
+    # Una imagen es una plantilla pre-hecha.
+    image: postgres:15
+
+    # Esto asegura que si reinicias tu computadora, el contenedor de la base de datos
+    # se inicie automáticamente.
+    restart: always
+
+    # Aquí definimos las variables de entorno para configurar la base de datos.
+    # ¡IMPORTANTE! Estos son tus secretos. Cámbialos si quieres más seguridad.
+    environment:
+      POSTGRES_USER: happypaws_user      # El nombre de usuario para la base de datos
+      POSTGRES_PASSWORD: supersecretpassword # La contraseña para ese usuario
+      POSTGRES_DB: happypaws            # El nombre de la base de datos que se creará
+
+    # El "port mapping". Conecta un puerto de tu PC al puerto del contenedor.
+    # "5432:5432" significa: "Cualquier cosa que llegue al puerto 5432 de mi PC,
+    # envíala al puerto 5432 dentro del contenedor de PostgreSQL".
+    ports:
+      - "5432:5432"
+
+    # Los "volúmenes" son cruciales. Hacen que tus datos persistan.
+    # Le decimos a Docker: "Guarda todos los datos de la base de datos que están
+    # dentro del contenedor en una carpeta llamada 'postgres_data' en mi PC".
+    # Así, aunque borres el contenedor, tus datos estarán a salvo.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Docker gestionará la creación de este volumen por nosotros.
+volumes:
+  postgres_data:
