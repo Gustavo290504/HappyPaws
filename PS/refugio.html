@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HappyPaws – Refugio</title>
+  <link rel="stylesheet" href="style_refugio.css">
+</head>
+
+<body>
+  <header>
+    <h1>🐾 HappyPaws</h1>
+    <p>Conecta tu refugio con adoptantes responsables</p>
+  </header>
+
+  <main>
+    <!-- ====== SECCIÓN DE BIENVENIDA ====== -->
+    <section id="inicioSection" class="info">
+      <h2>¡Bienvenido al panel de refugios!</h2>
+      <p>¿Tu refugio ya está registrado?</p>
+      <div class="options">
+        <button onclick="mostrarLogin()">Iniciar sesión</button>
+        <button onclick="mostrarRegistro()">Registrar refugio</button>
+      </div>
+    </section>
+
+    <!-- ====== SECCIÓN DE LOGIN ====== -->
+    <section id="loginSection" class="info" style="display:none;">
+      <h2>Iniciar sesión</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Correo del refugio" required>
+        <input type="password" id="loginPassword" placeholder="Contraseña" required>
+        <button type="button" onclick="iniciarSesion()">Entrar</button>
+      </form>
+      <p>¿Aún no estás registrado? 
+        <a href="#" onclick="mostrarRegistro()">Regístrate aquí</a>
+      </p>
+    </section>
+
+    <!-- ====== SECCIÓN DE REGISTRO ====== -->
+    <section id="registroSection" class="info" style="display:none;">
+      <h2>Registrar refugio</h2>
+      <form id="registroForm">
+        <input type="text" id="nombreRefugio" placeholder="Nombre del refugio" required>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <input type="text" id="telefono" placeholder="Teléfono de contacto" maxlength="10">
+        <input type="text" id="ciudad" placeholder="Ciudad o municipio">
+        <input type="text" id="responsable" placeholder="Nombre del responsable">
+        <button type="button" onclick="registrarRefugio()">Registrar</button>
+      </form>
+      <p>¿Ya tienes una cuenta? 
+        <a href="#" onclick="mostrarLogin()">Inicia sesión</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 HappyPaws – Con amor por los animales 💙
+  </footer>
+
+  <script src="refugio.js"></script>
+</body>
+</html>

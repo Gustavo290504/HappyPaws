@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HappyPaws – Adoptante</title>
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Estilos de esta página -->
+  <link rel="stylesheet" href="usuario.css"/>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="hp-header">
+    <div class="hp-wrap">
+      <div class="hp-brand">
+        <span class="hp-logo" aria-hidden="true">🐾</span>
+        <h1>HappyPaws</h1>
+      </div>
+      <p class="hp-sub">Conecta con refugios y encuentra a tu compañero ideal</p>
+    </div>
+  </header>
+
+  <main class="hp-main">
+
+    <!-- ===== Pantalla de Bienvenida ===== -->
+    <section id="inicioSection" class="hp-card hp-auth active">
+      <h2>¡Bienvenido a HappyPaws!</h2>
+      <p class="hp-muted">El lugar donde las historias felices comienzan 💙</p>
+      <div class="hp-actions">
+        <button class="hp-btn hp-btn--primary" onclick="mostrarLogin()">Iniciar sesión</button>
+        <button class="hp-btn hp-btn--ghost"   onclick="mostrarRegistro()">Crear cuenta</button>
+      </div>
+    </section>
+
+    <!-- ===== Login ===== -->
+    <section id="loginSection" class="hp-card hp-auth" style="display:none">
+      <h2>Iniciar sesión</h2>
+      <form id="loginForm" onsubmit="event.preventDefault(); iniciarSesion();" class="hp-form">
+        <input type="email" id="loginEmail" placeholder="Correo electrónico" required />
+        <input type="password" id="loginPassword" placeholder="Contraseña" required />
+        <button type="submit" class="hp-btn hp-btn--primary hp-btn--full">Entrar</button>
+      </form>
+      <p class="hp-alt">¿No tienes cuenta?
+        <a href="#" onclick="mostrarRegistro()">Crea una aquí</a>
+      </p>
+    </section>
+
+    <!-- ===== Registro ===== -->
+    <section id="registroSection" class="hp-card hp-auth" style="display:none">
+      <h2>Crear cuenta</h2>
+      <form id="registroForm" onsubmit="event.preventDefault(); registrarUsuario();" class="hp-form">
+        <input type="text"     id="nombreComp" placeholder="Nombre completo" required />
+        <input type="email"    id="email"      placeholder="Correo electrónico" required />
+        <input type="password" id="password"   placeholder="Contraseña" required />
+        <input type="text"     id="telefono"   placeholder="Teléfono (solo números)" maxlength="10" />
+        <input type="text"     id="ciudad"     placeholder="Ciudad (Ej. Monterrey)" />
+        <button type="submit" class="hp-btn hp-btn--primary hp-btn--full">Registrar</button>
+      </form>
+      <p class="hp-alt">¿Ya tienes cuenta?
+        <a href="#" onclick="mostrarLogin()">Inicia sesión</a>
+      </p>
+    </section>
+
+    <!-- ===== Panel del Adoptante (después de login) ===== -->
+    <section id="panelUsuario" class="hp-panel" style="display:none">
+      <!-- Top bar del panel -->
+      <div class="hp-topbar">
+        <div class="hp-brand-sm">
+          <span class="hp-logo" aria-hidden="true">🐾</span>
+          <strong>HappyPaws</strong>
+        </div>
+        <div class="hp-user">
+          <span id="userName" class="hp-user__name">Usuario</span>
+          <button class="hp-btn hp-btn--danger" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <!-- Bienvenida -->
+      <section class="hp-hello hp-card">
+        <h2>¡Hola <span id="nombreUsuario">amigo</span>! 💙</h2>
+        <p class="hp-muted">Encuentra a tu compañero ideal y adopta con el corazón.</p>
+      </section>
+
+      <!-- Mascotas -->
+      <section class="hp-card">
+        <h3 class="hp-section-title">🐶 Mascotas disponibles</h3>
+        <div id="listaMascotas" class="hp-grid"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="hp-footer">
+    <div class="hp-wrap">
+      © 2025 HappyPaws — Cuidamos corazones, no solo mascotas 💕
+    </div>
+  </footer>
+
+  <!-- Tu lógica actual -->
+  <script src="script.js"></script>
+</body>
+</html>
